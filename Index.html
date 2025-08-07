@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R.R. Chat Chopati - Family Restaurant</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #d35400;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .owner {
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        .contact {
+            background-color: #e67e22;
+            padding: 10px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        .category {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .category-title {
+            color: #d35400;
+            border-bottom: 2px solid #f39c12;
+            padding-bottom: 8px;
+            margin-top: 0;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+        }
+        .item-name {
+            font-weight: 500;
+        }
+        .item-price {
+            font-weight: bold;
+            color: #d35400;
+            margin: 0 10px;
+        }
+        .add-to-cart {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .add-to-cart:hover {
+            background-color: #2ecc71;
+        }
+        .cart-section {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            padding: 15px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 1000;
+        }
+        .cart-items {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .place-order {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .place-order i {
+            margin-right: 8px;
+        }
+        .cart-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #d35400;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 999;
+        }
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        .notice {
+            background-color: #f1c40f;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .remove-item {
+            color: #e74c3c;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>R.R. Chat Chopati</h1>
+        <div class="owner">Family Restaurant - Rahul Bhai</div>
+    </header>
+    
+    <div class="contact">
+        Contact: 9536911174
+    </div>
+    
+    <div class="container">
+        <div class="notice">
+            Delivery available on minimum order of ₹300. Extra ₹20 packing charges apply.
+        </div>
+        
+        <!-- Paneer Items -->
+        <div class="category">
+            <h2 class="category-title">Paneer Items</h2>
+            <div class="menu-item">
+                <span class="item-name">Palak Paneer</span>
+                <span class="item-price">₹180</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Chole Paneer</span>
+                <span class="item-price">₹190</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Paneer Butter Masala</span>
+                <span class="item-price">₹200</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Kadhai Paneer</span>
+                <span class="item-price">₹210</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Chilli Paneer</span>
+                <span class="item-price">₹190</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+        </div>
+        
+        <!-- Sabji -->
+        <div class="category">
+            <h2 class="category-title">Sabji</h2>
+            <div class="menu-item">
+                <span class="item-name">Mix Veg</span>
+                <span class="item-price">₹150</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Malai Kofta</span>
+                <span class="item-price">₹180</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Dum Aloo</span>
+                <span class="item-price">₹160</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Aloo Gobhi</span>
+                <span class="item-price">₹140</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+        </div>
+        
+        <!-- Beverages -->
+        <div class="category">
+            <h2 class="category-title">Beverages</h2>
+            <div class="menu-item">
+                <span class="item-name">Butter Milk (Kullad)</span>
+                <span class="item-price">₹40</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Sweet Lassi</span>
+                <span class="item-price">₹60</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Chocolate Shake</span>
+                <span class="item-price">₹90</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+        </div>
+        
+        <!-- Thali -->
+        <div class="category">
+            <h2 class="category-title">Thali</h2>
+            <div class="menu-item">
+                <span class="item-name">Regular Thali</span>
+                <span class="item-price">₹220</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Special Thali</span>
+                <span class="item-price">₹280</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+        </div>
+        
+        <!-- Chat Items -->
+        <div class="category">
+            <h2 class="category-title">RR Chat Chopati Items</h2>
+            <div class="menu-item">
+                <span class="item-name">Dahi Puri</span>
+                <span class="item-price">₹60</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Samosa Chat (2pcs)</span>
+                <span class="item-price">₹70</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Golgappe (6pcs)</span>
+                <span class="item-price">₹50</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+            <div class="menu-item">
+                <span class="item-name">Jalebi</span>
+                <span class="item-price">₹80</span>
+                <button class="add-to-cart">Add</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cart Button -->
+    <div class="cart-toggle">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+    </div>
+    
+    <!-- Cart Section -->
+    <div class="cart-section">
+        <h3>Your Order</h3>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be added here -->
+        </div>
+        <div class="cart-total">
+            <strong>Total: ₹<span id="cart-total">0</span></strong>
+            <span id="packing-charge" style="display: none;"> (+ ₹20 packing charge)</span>
+        </div>
+        <button class="place-order" id="place-order">
+            <i class="fab fa-whatsapp"></i> Place Order via WhatsApp
+        </button>
+    </div>
+    
+    <script>
+        let cart = [];
+        let total = 0;
+        
+        // Toggle cart visibility
+        document.querySelector('.cart-toggle').addEventListener('click', function() {
+            const cartSection = document.querySelector('.cart-section');
+            if (cartSection.style.display === 'block') {
+                cartSection.style.display = 'none';
+            } else {
+                cartSection.style.display = 'block';
+            }
+        });
+        
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const itemElement = this.parentElement;
+                const itemName = itemElement.querySelector('.item-name').textContent;
+                const itemPrice = parseInt(itemElement.querySelector('.item-price').textContent.replace('₹', ''));
+                
+                // Check if item already in cart
+                const existingItem = cart.find(item => item.name === itemName);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        name: itemName,
+                        price: itemPrice,
+                        quantity: 1
+                    });
+                }
+                
+                total += itemPrice;
+                updateCart();
+            });
+        });
+        
+        // Update cart display
+        function updateCart() {
+            const cartItemsElement = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+            const cartCountElement = document.querySelector('.cart-count');
+            const packingChargeElement = document.getElementById('packing-charge');
+            
+            // Clear cart items
+            cartItemsElement.innerHTML = '';
+            
+            // Add each item to cart display
+            cart.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                    <span>${item.name} × ${item.quantity}</span>
+                    <span>₹${item.price * item.quantity}</span>
+                    <button class="remove-item" data-index="${index}">×</button>
+                `;
+                cartItemsElement.appendChild(itemElement);
+            });
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    const removedItem = cart[index];
+                    total -= removedItem.price * removedItem.quantity;
+                    cart.splice(index, 1);
+                    updateCart();
+                });
+            });
+            
+            // Update total and count
+            cartTotalElement.textContent = total;
+            const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountElement.textContent = itemCount;
+            
+            // Show packing charge if total > 0
+            if (total > 0) {
+                packingChargeElement.style.display = 'inline';
+            } else {
+                packingChargeElement.style.display = 'none';
+            }
+        }
+        
+        // Place order via WhatsApp - UPDATED RELIABLE VERSION
+        document.getElementById('place-order').addEventListener('click', function() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            // Prepare WhatsApp message
+            let message = `Hello R.R. Chat Chopati (Rahul Bhai),\n\nI would like to order:\n\n`;
+            
+            cart.forEach(item => {
+                message += `• ${item.name} (Qty: ${item.quantity}) - ₹${item.price * item.quantity}\n`;
+            });
+            
+            // Add packing charge if applicable
+            const finalTotal = total + 20; // Adding ₹20 packing charge
+            message += `\nSubtotal: ₹${total}`;
+            message += `\nPacking Charge: ₹20`;
+            message += `\nTotal: ₹${finalTotal}`;
+            message += `\n\nDelivery Address: \n[Please provide your complete address here]`;
+            message += `\n\nContact Number: \n[Please provide your contact number]`;
+            
+            // Create a temporary link element (more reliable than window.open)
+            const link = document.createElement('a');
+            link.href = `https://wa.me/919536911174?text=${encodeURIComponent(message)}`;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+</body>
+</html>
